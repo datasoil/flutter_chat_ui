@@ -51,6 +51,7 @@ abstract class ChatTheme {
   const ChatTheme({
     required this.attachmentButtonIcon,
     required this.backgroundColor,
+    required this.caption,
     required this.dateDividerTextStyle,
     required this.deliveredIcon,
     required this.documentIcon,
@@ -79,6 +80,10 @@ abstract class ChatTheme {
     required this.userAvatarNameColors,
     required this.userAvatarTextStyle,
     required this.userNameTextStyle,
+    required this.playButtonIcon,
+    required this.videoTrackBackgroundColor,
+    required this.videoTrackPlayedColor,
+    required this.videoTrackBufferedColor,
   });
 
   /// Icon for select attachment button
@@ -86,6 +91,9 @@ abstract class ChatTheme {
 
   /// Used as a background color of a chat widget
   final Color backgroundColor;
+
+  /// Smallest text style, used for displaying message's time
+  final TextStyle caption;
 
   /// Text style of the date dividers
   final TextStyle dateDividerTextStyle;
@@ -179,6 +187,18 @@ abstract class ChatTheme {
 
   /// User names text style. Color will be overwritten with [userAvatarNameColors].
   final TextStyle userNameTextStyle;
+
+  /// Icon for play button
+  final String? playButtonIcon;
+
+  /// Background color of track in video messages
+  final Color videoTrackBackgroundColor;
+
+  /// Color of the played part of the track in video messages
+  final Color videoTrackPlayedColor;
+
+  /// Color of the buffered part of the track in video messages
+  final Color videoTrackBufferedColor;
 }
 
 /// Default chat theme which extends [ChatTheme]
@@ -190,6 +210,12 @@ class DefaultChatTheme extends ChatTheme {
   const DefaultChatTheme({
     Widget? attachmentButtonIcon,
     Color backgroundColor = NEUTRAL_7,
+    TextStyle caption = const TextStyle(
+      fontFamily: 'Avenir',
+      fontSize: 12,
+      fontWeight: FontWeight.w500,
+      height: 1.333,
+    ),
     TextStyle dateDividerTextStyle = const TextStyle(
       color: NEUTRAL_2,
       fontFamily: 'Avenir',
@@ -296,9 +322,14 @@ class DefaultChatTheme extends ChatTheme {
       fontWeight: FontWeight.w800,
       height: 1.333,
     ),
+    String? playButtonIcon,
+    Color videoTrackBackgroundColor = const Color.fromRGBO(200, 200, 200, 0.5),
+    Color videoTrackBufferedColor = const Color.fromRGBO(50, 50, 200, 0.2),
+    Color videoTrackPlayedColor = const Color(0xaa6f61e8),
   }) : super(
           attachmentButtonIcon: attachmentButtonIcon,
           backgroundColor: backgroundColor,
+          caption: caption,
           dateDividerTextStyle: dateDividerTextStyle,
           deliveredIcon: deliveredIcon,
           documentIcon: documentIcon,
@@ -329,6 +360,10 @@ class DefaultChatTheme extends ChatTheme {
           userAvatarNameColors: userAvatarNameColors,
           userAvatarTextStyle: userAvatarTextStyle,
           userNameTextStyle: userNameTextStyle,
+          playButtonIcon: playButtonIcon,
+          videoTrackBackgroundColor: videoTrackBackgroundColor,
+          videoTrackBufferedColor: videoTrackBufferedColor,
+          videoTrackPlayedColor: videoTrackPlayedColor,
         );
 }
 
@@ -341,6 +376,12 @@ class DarkChatTheme extends ChatTheme {
   const DarkChatTheme({
     Widget? attachmentButtonIcon,
     Color backgroundColor = DARK,
+    TextStyle caption = const TextStyle(
+      fontFamily: 'Avenir',
+      fontSize: 12,
+      fontWeight: FontWeight.w500,
+      height: 1.333,
+    ),
     TextStyle dateDividerTextStyle = const TextStyle(
       color: NEUTRAL_7,
       fontFamily: 'Avenir',
@@ -447,9 +488,14 @@ class DarkChatTheme extends ChatTheme {
       fontWeight: FontWeight.w800,
       height: 1.333,
     ),
+    String? playButtonIcon,
+    Color videoTrackBackgroundColor = const Color.fromRGBO(200, 200, 200, 0.5),
+    Color videoTrackBufferedColor = const Color.fromRGBO(50, 50, 200, 0.2),
+    Color videoTrackPlayedColor = const Color(0xaa6f61e8),
   }) : super(
           attachmentButtonIcon: attachmentButtonIcon,
           backgroundColor: backgroundColor,
+          caption: caption,
           dateDividerTextStyle: dateDividerTextStyle,
           deliveredIcon: deliveredIcon,
           documentIcon: documentIcon,
@@ -480,5 +526,9 @@ class DarkChatTheme extends ChatTheme {
           userAvatarNameColors: userAvatarNameColors,
           userAvatarTextStyle: userAvatarTextStyle,
           userNameTextStyle: userNameTextStyle,
+          playButtonIcon: playButtonIcon,
+          videoTrackBackgroundColor: videoTrackBackgroundColor,
+          videoTrackBufferedColor: videoTrackBufferedColor,
+          videoTrackPlayedColor: videoTrackPlayedColor,
         );
 }

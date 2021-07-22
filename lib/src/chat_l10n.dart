@@ -11,6 +11,7 @@ abstract class ChatL10n {
     required this.fileButtonAccessibilityLabel,
     required this.inputPlaceholder,
     required this.sendButtonAccessibilityLabel,
+    required this.videoPlayerAccessibilityLabel,
   });
 
   /// Accessibility label (hint) for the attachment button
@@ -27,6 +28,9 @@ abstract class ChatL10n {
 
   /// Accessibility label (hint) for the send button
   final String sendButtonAccessibilityLabel;
+
+  /// Accessibility label (hint) for the video player in video message
+  final String videoPlayerAccessibilityLabel;
 }
 
 /// English l10n which extends [ChatL10n]
@@ -41,14 +45,15 @@ class ChatL10nEn extends ChatL10n {
     String fileButtonAccessibilityLabel = 'File',
     String inputPlaceholder = 'Message',
     String sendButtonAccessibilityLabel = 'Send',
+    String videoPlayerAccessibilityLabel = 'Play/Pause',
   }) : super(
-          attachmentButtonAccessibilityLabel:
-              attachmentButtonAccessibilityLabel,
-          emptyChatPlaceholder: emptyChatPlaceholder,
-          fileButtonAccessibilityLabel: fileButtonAccessibilityLabel,
-          inputPlaceholder: inputPlaceholder,
-          sendButtonAccessibilityLabel: sendButtonAccessibilityLabel,
-        );
+            attachmentButtonAccessibilityLabel:
+                attachmentButtonAccessibilityLabel,
+            emptyChatPlaceholder: emptyChatPlaceholder,
+            fileButtonAccessibilityLabel: fileButtonAccessibilityLabel,
+            inputPlaceholder: inputPlaceholder,
+            sendButtonAccessibilityLabel: sendButtonAccessibilityLabel,
+            videoPlayerAccessibilityLabel: videoPlayerAccessibilityLabel);
 }
 
 /// Spanish l10n which extends [ChatL10n]
@@ -63,14 +68,15 @@ class ChatL10nEs extends ChatL10n {
     String fileButtonAccessibilityLabel = 'Archivo',
     String inputPlaceholder = 'Mensaje',
     String sendButtonAccessibilityLabel = 'Enviar',
+    String videoPlayerAccessibilityLabel = 'Play/Pause',
   }) : super(
-          attachmentButtonAccessibilityLabel:
-              attachmentButtonAccessibilityLabel,
-          emptyChatPlaceholder: emptyChatPlaceholder,
-          fileButtonAccessibilityLabel: fileButtonAccessibilityLabel,
-          inputPlaceholder: inputPlaceholder,
-          sendButtonAccessibilityLabel: sendButtonAccessibilityLabel,
-        );
+            attachmentButtonAccessibilityLabel:
+                attachmentButtonAccessibilityLabel,
+            emptyChatPlaceholder: emptyChatPlaceholder,
+            fileButtonAccessibilityLabel: fileButtonAccessibilityLabel,
+            inputPlaceholder: inputPlaceholder,
+            sendButtonAccessibilityLabel: sendButtonAccessibilityLabel,
+            videoPlayerAccessibilityLabel: videoPlayerAccessibilityLabel);
 }
 
 /// Korean l10n which extends [ChatL10n]
@@ -85,14 +91,15 @@ class ChatL10nKo extends ChatL10n {
     String fileButtonAccessibilityLabel = '파일',
     String inputPlaceholder = '메시지',
     String sendButtonAccessibilityLabel = '보내기',
+    String videoPlayerAccessibilityLabel = 'Play/Pause',
   }) : super(
-          attachmentButtonAccessibilityLabel:
-              attachmentButtonAccessibilityLabel,
-          emptyChatPlaceholder: emptyChatPlaceholder,
-          fileButtonAccessibilityLabel: fileButtonAccessibilityLabel,
-          inputPlaceholder: inputPlaceholder,
-          sendButtonAccessibilityLabel: sendButtonAccessibilityLabel,
-        );
+            attachmentButtonAccessibilityLabel:
+                attachmentButtonAccessibilityLabel,
+            emptyChatPlaceholder: emptyChatPlaceholder,
+            fileButtonAccessibilityLabel: fileButtonAccessibilityLabel,
+            inputPlaceholder: inputPlaceholder,
+            sendButtonAccessibilityLabel: sendButtonAccessibilityLabel,
+            videoPlayerAccessibilityLabel: videoPlayerAccessibilityLabel);
 }
 
 /// Polish l10n which extends [ChatL10n]
@@ -107,14 +114,15 @@ class ChatL10nPl extends ChatL10n {
     String fileButtonAccessibilityLabel = 'Plik',
     String inputPlaceholder = 'Napisz wiadomość',
     String sendButtonAccessibilityLabel = 'Wyślij',
+    String videoPlayerAccessibilityLabel = 'Play/Pause',
   }) : super(
-          attachmentButtonAccessibilityLabel:
-              attachmentButtonAccessibilityLabel,
-          emptyChatPlaceholder: emptyChatPlaceholder,
-          fileButtonAccessibilityLabel: fileButtonAccessibilityLabel,
-          inputPlaceholder: inputPlaceholder,
-          sendButtonAccessibilityLabel: sendButtonAccessibilityLabel,
-        );
+            attachmentButtonAccessibilityLabel:
+                attachmentButtonAccessibilityLabel,
+            emptyChatPlaceholder: emptyChatPlaceholder,
+            fileButtonAccessibilityLabel: fileButtonAccessibilityLabel,
+            inputPlaceholder: inputPlaceholder,
+            sendButtonAccessibilityLabel: sendButtonAccessibilityLabel,
+            videoPlayerAccessibilityLabel: videoPlayerAccessibilityLabel);
 }
 
 /// Portuguese l10n which extends [ChatL10n]
@@ -129,14 +137,15 @@ class ChatL10nPt extends ChatL10n {
     String fileButtonAccessibilityLabel = 'Arquivo',
     String inputPlaceholder = 'Mensagem',
     String sendButtonAccessibilityLabel = 'Enviar',
+    String videoPlayerAccessibilityLabel = 'Play/Pause',
   }) : super(
-          attachmentButtonAccessibilityLabel:
-              attachmentButtonAccessibilityLabel,
-          emptyChatPlaceholder: emptyChatPlaceholder,
-          fileButtonAccessibilityLabel: fileButtonAccessibilityLabel,
-          inputPlaceholder: inputPlaceholder,
-          sendButtonAccessibilityLabel: sendButtonAccessibilityLabel,
-        );
+            attachmentButtonAccessibilityLabel:
+                attachmentButtonAccessibilityLabel,
+            emptyChatPlaceholder: emptyChatPlaceholder,
+            fileButtonAccessibilityLabel: fileButtonAccessibilityLabel,
+            inputPlaceholder: inputPlaceholder,
+            sendButtonAccessibilityLabel: sendButtonAccessibilityLabel,
+            videoPlayerAccessibilityLabel: videoPlayerAccessibilityLabel);
 }
 
 /// Russian l10n which extends [ChatL10n]
@@ -151,14 +160,15 @@ class ChatL10nRu extends ChatL10n {
     String fileButtonAccessibilityLabel = 'Файл',
     String inputPlaceholder = 'Сообщение',
     String sendButtonAccessibilityLabel = 'Отправить',
+    String videoPlayerAccessibilityLabel = 'Play/Pause',
   }) : super(
-          attachmentButtonAccessibilityLabel:
-              attachmentButtonAccessibilityLabel,
-          emptyChatPlaceholder: emptyChatPlaceholder,
-          fileButtonAccessibilityLabel: fileButtonAccessibilityLabel,
-          inputPlaceholder: inputPlaceholder,
-          sendButtonAccessibilityLabel: sendButtonAccessibilityLabel,
-        );
+            attachmentButtonAccessibilityLabel:
+                attachmentButtonAccessibilityLabel,
+            emptyChatPlaceholder: emptyChatPlaceholder,
+            fileButtonAccessibilityLabel: fileButtonAccessibilityLabel,
+            inputPlaceholder: inputPlaceholder,
+            sendButtonAccessibilityLabel: sendButtonAccessibilityLabel,
+            videoPlayerAccessibilityLabel: videoPlayerAccessibilityLabel);
 }
 
 /// Ukrainian l10n which extends [ChatL10n]
@@ -173,12 +183,13 @@ class ChatL10nUk extends ChatL10n {
     String fileButtonAccessibilityLabel = 'Файл',
     String inputPlaceholder = 'Повідомлення',
     String sendButtonAccessibilityLabel = 'Надіслати',
+    String videoPlayerAccessibilityLabel = 'Play/Pause',
   }) : super(
-          attachmentButtonAccessibilityLabel:
-              attachmentButtonAccessibilityLabel,
-          emptyChatPlaceholder: emptyChatPlaceholder,
-          fileButtonAccessibilityLabel: fileButtonAccessibilityLabel,
-          inputPlaceholder: inputPlaceholder,
-          sendButtonAccessibilityLabel: sendButtonAccessibilityLabel,
-        );
+            attachmentButtonAccessibilityLabel:
+                attachmentButtonAccessibilityLabel,
+            emptyChatPlaceholder: emptyChatPlaceholder,
+            fileButtonAccessibilityLabel: fileButtonAccessibilityLabel,
+            inputPlaceholder: inputPlaceholder,
+            sendButtonAccessibilityLabel: sendButtonAccessibilityLabel,
+            videoPlayerAccessibilityLabel: videoPlayerAccessibilityLabel);
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
+import 'package:flutter_chat_ui/src/widgets/video_message.dart';
 import '../util.dart';
 import 'file_message.dart';
 import 'image_message.dart';
@@ -96,11 +97,6 @@ class Message extends StatelessWidget {
 
   Widget _buildMessage() {
     switch (message.type) {
-      case types.MessageType.custom:
-        final customMessage = message as types.CustomMessage;
-        return buildCustomMessage != null
-            ? buildCustomMessage!(customMessage)
-            : const SizedBox();
       case types.MessageType.file:
         final fileMessage = message as types.FileMessage;
         return FileMessage(
@@ -110,6 +106,12 @@ class Message extends StatelessWidget {
         final imageMessage = message as types.ImageMessage;
         return ImageMessage(
           message: imageMessage,
+          messageWidth: messageWidth,
+        );
+      case types.MessageType.video:
+        final videoMessage = message as types.VideoMessage;
+        return VideoMessage(
+          message: videoMessage,
           messageWidth: messageWidth,
         );
       case types.MessageType.text:
