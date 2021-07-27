@@ -31,6 +31,9 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   pedantic: ^1.11.1
+dependency_overrides:
+  flutter_chat_types:
+    path: ../flutter_chat_types
 
 flutter:
   assets:

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
+import 'package:flutter_chat_ui/src/widgets/choice_message.dart';
+import 'package:flutter_chat_ui/src/widgets/question_message.dart';
 import 'package:flutter_chat_ui/src/widgets/video_message.dart';
 import '../util.dart';
 import 'file_message.dart';
@@ -21,6 +23,7 @@ class Message extends StatelessWidget {
     this.onMessageLongPress,
     this.onMessageTap,
     this.onPreviewDataFetched,
+    this.onChoiceSelect,
     required this.roundBorder,
     required this.showAvatar,
     required this.showName,
@@ -34,6 +37,8 @@ class Message extends StatelessWidget {
 
   /// Any message type
   final types.Message message;
+
+  final void Function(types.Choice, types.Message)? onChoiceSelect;
 
   /// Maximum message width
   final int messageWidth;
@@ -121,6 +126,19 @@ class Message extends StatelessWidget {
           onPreviewDataFetched: onPreviewDataFetched,
           showName: showName,
           usePreviewData: usePreviewData,
+        );
+      case types.MessageType.choice:
+        final choiceMessage = message as types.ChoiceMessage;
+        return ChoiceMessage(
+          message: choiceMessage,
+          showName: showName,
+        );
+      case types.MessageType.question:
+        final questionMessage = message as types.QuestionMessage;
+        return QuestionMessage(
+          message: questionMessage,
+          showName: showName,
+          onChoiceTap: onChoiceSelect,
         );
       default:
         return const SizedBox();

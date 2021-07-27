@@ -38,6 +38,7 @@ class Chat extends StatefulWidget {
     this.onMessageLongPress,
     this.onMessageTap,
     this.onPreviewDataFetched,
+    this.onChoiceSelect,
     required this.onSendPressed,
     this.onTextChanged,
     this.showUserAvatars = false,
@@ -108,6 +109,8 @@ class Chat extends StatefulWidget {
 
   /// See [Message.onMessageTap]
   final void Function(types.Message)? onMessageTap;
+
+  final void Function(types.Choice, types.Message)? onChoiceSelect;
 
   /// See [Message.onPreviewDataFetched]
   final void Function(types.TextMessage, types.PreviewData)?
@@ -259,6 +262,7 @@ class _ChatState extends State<Chat> {
         buildCustomMessage: widget.buildCustomMessage,
         message: message,
         messageWidth: _messageWidth,
+        onChoiceSelect: widget.onChoiceSelect,
         onMessageLongPress: widget.onMessageLongPress,
         onMessageTap: (tappedMessage) {
           if (tappedMessage is types.ImageMessage &&
