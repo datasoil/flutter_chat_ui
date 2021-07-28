@@ -30,14 +30,14 @@ class ImageMessage extends StatefulWidget {
 
 /// [ImageMessage] widget state
 class _ImageMessageState extends State<ImageMessage> {
-  ImageProvider? _image;
-  ImageStream? _stream;
+  ImageProvider? _imageProvider;
+  ImageStream? _imageStream;
   Size _size = const Size(0, 0);
 
   @override
   void initState() {
     super.initState();
-    _image = Conditional().getProvider(widget.message.uri);
+    _imageProvider = Conditional().getProvider(widget.message.uri);
     _size = Size(widget.message.width ?? 0, widget.message.height ?? 0);
   }
 
@@ -49,15 +49,26 @@ class _ImageMessageState extends State<ImageMessage> {
     }
   }
 
-  void _getImage() {
-    final oldImageStream = _stream;
-    _stream = _image?.resolve(createLocalImageConfiguration(context));
-    if (_stream?.key == oldImageStream?.key) {
-      return;
+  @override
+  void didUpdateWidget(covariant ImageMessage oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.message.uri != widget.message.uri) {
+      setState(() {
+        _imageProvider = Conditional().getProvider(widget.message.uri);
+      });
+      _getImage();
     }
-    final listener = ImageStreamListener(_updateImage);
-    oldImageStream?.removeListener(listener);
-    _stream?.addListener(listener);
+  }
+
+  void _getImage() {
+    final oldImageStream = _imageStream;
+    _imageStream =
+        _imageProvider?.resolve(createLocalImageConfiguration(context));
+    if (_imageStream?.key != oldImageStream?.key) {
+      final listener = ImageStreamListener(_updateImage);
+      oldImageStream?.removeListener(listener);
+      _imageStream?.addListener(listener);
+    }
   }
 
   void _updateImage(ImageInfo info, bool _) {
@@ -71,7 +82,7 @@ class _ImageMessageState extends State<ImageMessage> {
 
   @override
   void dispose() {
-    _stream?.removeListener(ImageStreamListener(_updateImage));
+    _imageStream?.removeListener(ImageStreamListener(_updateImage));
     super.dispose();
   }
 
@@ -101,7 +112,7 @@ class _ImageMessageState extends State<ImageMessage> {
                 borderRadius: BorderRadius.circular(15),
                 child: Image(
                   fit: BoxFit.cover,
-                  image: _image!,
+                  image: _imageProvider!,
                 ),
               ),
             ),
@@ -153,7 +164,7 @@ class _ImageMessageState extends State<ImageMessage> {
         decoration: BoxDecoration(
           image: DecorationImage(
             fit: BoxFit.cover,
-            image: _image!,
+            image: _imageProvider!,
           ),
         ),
         child: BackdropFilter(
@@ -162,7 +173,7 @@ class _ImageMessageState extends State<ImageMessage> {
             aspectRatio: _size.aspectRatio > 0 ? _size.aspectRatio : 1,
             child: Image(
               fit: BoxFit.contain,
-              image: _image!,
+              image: _imageProvider!,
             ),
           ),
         ),

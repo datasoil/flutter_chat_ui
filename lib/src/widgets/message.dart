@@ -24,6 +24,7 @@ class Message extends StatelessWidget {
     this.onMessageTap,
     this.onPreviewDataFetched,
     this.onChoiceSelect,
+    this.onVideoTap,
     required this.roundBorder,
     required this.showAvatar,
     required this.showName,
@@ -48,6 +49,8 @@ class Message extends StatelessWidget {
 
   /// Called when user taps on any message
   final void Function(types.Message)? onMessageTap;
+
+  final void Function(types.VideoMessage)? onVideoTap;
 
   /// See [TextMessage.onPreviewDataFetched]
   final void Function(types.TextMessage, types.PreviewData)?
@@ -118,6 +121,7 @@ class Message extends StatelessWidget {
         return VideoMessage(
           message: videoMessage,
           messageWidth: messageWidth,
+          onVideoTap: onVideoTap,
         );
       case types.MessageType.text:
         final textMessage = message as types.TextMessage;

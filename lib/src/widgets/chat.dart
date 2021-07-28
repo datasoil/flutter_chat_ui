@@ -37,6 +37,7 @@ class Chat extends StatefulWidget {
     this.onEndReachedThreshold,
     this.onMessageLongPress,
     this.onMessageTap,
+    this.onVideoTap,
     this.onPreviewDataFetched,
     this.onChoiceSelect,
     required this.onSendPressed,
@@ -109,6 +110,8 @@ class Chat extends StatefulWidget {
 
   /// See [Message.onMessageTap]
   final void Function(types.Message)? onMessageTap;
+
+  final void Function(types.VideoMessage)? onVideoTap;
 
   final void Function(types.Choice, types.Message)? onChoiceSelect;
 
@@ -263,6 +266,7 @@ class _ChatState extends State<Chat> {
         message: message,
         messageWidth: _messageWidth,
         onChoiceSelect: widget.onChoiceSelect,
+        onVideoTap: widget.onVideoTap,
         onMessageLongPress: widget.onMessageLongPress,
         onMessageTap: (tappedMessage) {
           if (tappedMessage is types.ImageMessage &&

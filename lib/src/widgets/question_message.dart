@@ -23,8 +23,8 @@ class QuestionMessage extends StatelessWidget {
   /// Show user name for the received message. Useful for a group chat.
   final bool showName;
 
-  List<Widget> _buildChoicesList() {
-    return message.choices.entries
+  List<Widget> _buildChoicesList(types.User user) {
+    return message.choices
         .map((e) => GestureDetector(
             child: Padding(
                 padding: EdgeInsets.symmetric(vertical: 5),
@@ -32,19 +32,24 @@ class QuestionMessage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      e.value.toString(),
-                      style: const TextStyle(color: Colors.white, fontSize: 16),
+                      e.text.toString(),
+                      style: TextStyle(
+                          color: user.id == message.author.id
+                              ? Colors.white
+                              : Colors.black,
+                          fontSize: 16),
                     ),
-                    const Divider(
-                      color: Colors.white,
+                    Divider(
+                      color: user.id == message.author.id
+                          ? Colors.white
+                          : Colors.black,
                       indent: 10,
                       endIndent: 10,
                     )
                   ],
                 )),
             onTap: () => {
-                  onChoiceTap?.call(
-                      types.Choice.fromJson({e.key: e.value}), message),
+                  onChoiceTap?.call(e, message),
                 }))
         .toList();
   }
@@ -73,14 +78,19 @@ class QuestionMessage extends StatelessWidget {
           ),
         Text(
           message.question,
-          style: const TextStyle(
-              fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold),
+          style: TextStyle(
+              fontSize: 18,
+              color: user.id == message.author.id ? Colors.white : Colors.black,
+              fontWeight: FontWeight.bold),
         ),
-        const Divider(
-          color: Colors.white,
-        ),
+        message.choices.isEmpty
+            ? Divider(
+                color:
+                    user.id == message.author.id ? Colors.white : Colors.black,
+              )
+            : SizedBox.shrink(),
         Column(
-          children: _buildChoicesList(),
+          children: _buildChoicesList(user),
         ),
       ],
     );
@@ -92,7 +102,7 @@ class QuestionMessage extends StatelessWidget {
     final _width = MediaQuery.of(context).size.width;
 
     return Container(
-      width: _width,
+      width: _width * 4 / 5,
       margin: const EdgeInsets.symmetric(
         horizontal: 24,
         vertical: 16,
