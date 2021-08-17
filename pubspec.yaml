@@ -16,7 +16,7 @@ dependencies:
   equatable: ^2.0.3
   flutter_chat_types:
     git:
-      url: git://github.com/Panz99/flutter_chat_types
+      url: git://github.com/datasoil/flutter_chat_types
       ref: main
   flutter_link_previewer: 
     git:
