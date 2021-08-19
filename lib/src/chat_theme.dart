@@ -44,6 +44,8 @@ const SECONDARY = Color(0xfff5f5f7);
 /// Secondary dark
 const SECONDARY_DARK = Color(0xff2b2250);
 
+/// default text style
+
 /// Base chat theme containing all required variables to make a theme.
 /// Extend this class if you want to create a custom theme.
 @immutable

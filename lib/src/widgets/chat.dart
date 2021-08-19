@@ -44,12 +44,18 @@ class Chat extends StatefulWidget {
     this.onTextChanged,
     this.showUserAvatars = false,
     this.showUserNames = false,
-    this.theme = const DefaultChatTheme(),
+    this.theme =const DefaultChatTheme(),
     this.timeFormat,
     this.usePreviewData = true,
     required this.user,
+    this.textInput = false,
+    this.mediaInput = false,
   }) : super(key: key);
 
+  /// for activating and deactivating text input
+  final bool textInput;
+  /// for activating and deactivating media input
+  final bool mediaInput;
   /// See [Message.buildCustomMessage]
   final Widget Function(types.Message)? buildCustomMessage;
 
@@ -333,6 +339,37 @@ class _ChatState extends State<Chat> {
     widget.onPreviewDataFetched?.call(message, previewData);
   }
 
+  Widget createNoInputBanner(BuildContext context) {
+  var size = MediaQuery.of(context).size;
+  var width = size.width;
+  var height = size.height/10;
+    return Container(
+      color: Colors.green,
+      child: Center(child: const Text('Input is temporary disabled', 
+      style: TextStyle(      
+        fontFamily: 'Avenir',
+      fontSize: 16,
+      fontWeight: FontWeight.w300,
+      height: 1.333
+      ))),
+      width: width,
+      height: height,
+    );
+  }
+
+Widget createMediaInputOnly(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+    var width = size.width/2;
+    var height = size.height/6;
+    return Container(
+      height: height,
+      width: width,
+      child: InkResponse(
+        child: Ink.image(image: const AssetImage('assets/attach.png')),
+      )
+    );
+}
+
   @override
   Widget build(BuildContext context) {
     return InheritedUser(
@@ -368,12 +405,12 @@ class _ChatState extends State<Chat> {
                                 ),
                               ),
                       ),
-                      Input(
+                      (widget.textInput ? Input(
                         isAttachmentUploading: widget.isAttachmentUploading,
                         onAttachmentPressed: widget.onAttachmentPressed,
                         onSendPressed: widget.onSendPressed,
                         onTextChanged: widget.onTextChanged,
-                      ),
+                      ): (widget.mediaInput ? createMediaInputOnly(context) : createNoInputBanner(context))) 
                     ],
                   ),
                 ),
