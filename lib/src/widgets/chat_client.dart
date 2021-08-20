@@ -18,9 +18,9 @@ import 'input.dart';
 import 'message.dart';
 
 /// Entry widget, represents the complete chat
-class Chat extends StatefulWidget {
+class ChatClient extends StatefulWidget {
   /// Creates a chat widget
-  const Chat({
+  const ChatClient({
     Key? key,
     this.buildCustomMessage,
     this.customDateHeaderText,
@@ -44,11 +44,20 @@ class Chat extends StatefulWidget {
     this.onTextChanged,
     this.showUserAvatars = false,
     this.showUserNames = false,
-    this.theme =const DefaultChatTheme(),
+    this.theme = const DefaultChatTheme(),
     this.timeFormat,
     this.usePreviewData = true,
     required this.user,
+    this.textInput = false,
+    this.mediaInput = false,
   }) : super(key: key);
+
+  /// for activating and deactivating text input
+  final bool textInput;
+
+  /// for activating and deactivating media input
+  final bool mediaInput;
+
   /// See [Message.buildCustomMessage]
   final Widget Function(types.Message)? buildCustomMessage;
 
@@ -154,21 +163,25 @@ class Chat extends StatefulWidget {
 }
 
 /// [Chat] widget state
-class _ChatState extends State<Chat> {
+class _ChatState extends State<ChatClient> {
   List<Object> _chatMessages = [];
   List<PreviewImage> _gallery = [];
   int _imageViewIndex = 0;
   bool _isImageViewVisible = false;
-
+  bool _mediaInputState = false;
+  bool _textInputState = false;
   @override
   void initState() {
     super.initState();
-
+    // settiamo le due variabili con i valori passati nel costruttore della chat
+    _mediaInputState = widget.mediaInput;
+    _textInputState = widget.textInput;
+    //
     didUpdateWidget(widget);
   }
 
   @override
-  void didUpdateWidget(covariant Chat oldWidget) {
+  void didUpdateWidget(covariant ChatClient oldWidget) {
     super.didUpdateWidget(oldWidget);
 
     if (widget.messages.isNotEmpty) {
@@ -307,6 +320,8 @@ class _ChatState extends State<Chat> {
   void _onCloseGalleryPressed() {
     setState(() {
       _isImageViewVisible = false;
+      _mediaInputState = false;
+      _textInputState = false;
     });
   }
 
@@ -333,22 +348,37 @@ class _ChatState extends State<Chat> {
   }
 
   Widget createNoInputBanner(BuildContext context) {
-  var size = MediaQuery.of(context).size;
-  var width = size.width;
-  var height = size.height/10;
+    var size = MediaQuery.of(context).size;
+    var width = size.width;
+    var height = size.height / 10;
     return Container(
       color: Colors.green,
       // ignore: sort_child_properties_last
-      child: const Center(child: Text('Input is temporary disabled', 
-      style: TextStyle(      
-        fontFamily: 'Avenir',
-      fontSize: 16,
-      fontWeight: FontWeight.w300,
-      height: 1.333
-      ))),
+      child: const Center(
+          child: Text('Input is temporary disabled',
+              style: TextStyle(
+                  fontFamily: 'Avenir',
+                  fontSize: 16,
+                  fontWeight: FontWeight.w300,
+                  height: 1.333))),
       width: width,
       height: height,
     );
+  }
+
+  Widget createMediaInputOnly(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+    var width = size.width / 2;
+    var height = size.height / 6;
+    return Container(
+        color: Colors.orange,
+        height: height,
+        width: width,
+        child: const InkResponse(
+            //  onTap: widget.onAttachmentPressed,
+            child: Text(
+                'Qui ci va img') // Ink.image(image: const AssetImage('assets/attach.png')),
+            ));
   }
 
   @override
@@ -387,12 +417,39 @@ class _ChatState extends State<Chat> {
                               ),
                       ),
                       // ignore: prefer_if_elements_to_conditional_expressions
-                      Input(
-                        isAttachmentUploading: widget.isAttachmentUploading,
-                        onAttachmentPressed: widget.onAttachmentPressed,
-                        onSendPressed: widget.onSendPressed,
-                        onTextChanged: widget.onTextChanged,
-                      )
+                      (widget.textInput
+                          ? Input(
+                              isAttachmentUploading:
+                                  widget.isAttachmentUploading,
+                              onAttachmentPressed: widget.onAttachmentPressed,
+                              onSendPressed: widget.onSendPressed,
+                              onTextChanged: widget.onTextChanged,
+                            )
+                          : (widget.mediaInput
+                              ? Container(
+                                  decoration: BoxDecoration(
+                                      color: widget.theme.primaryColor,
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(50))),
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.7,
+                                  height:
+                                      MediaQuery.of(context).size.height / 10,
+                                  margin: EdgeInsets.only(bottom: 25),
+                                  child: ElevatedButton(
+                                      onPressed: widget.onAttachmentPressed,
+                                      child: Padding(
+                                        padding:
+                                            EdgeInsets.only(bottom: 5, top: 5),
+                                        child: Image.asset(
+                                          'assets/icon-attach.png',
+                                          package: 'flutter_chat_ui',
+                                        ),
+                                        //   tooltip:
+                                        //      InheritedL10n.of(context).l10n.attachmentButtonAccessibilityLabel,
+                                      )), //Ink.image(image: AssetImage('assets/icon-attach.png')),
+                                )
+                              : createNoInputBanner(context)))
                     ],
                   ),
                 ),
