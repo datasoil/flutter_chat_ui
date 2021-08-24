@@ -15,5 +15,4 @@ export 'src/widgets/question_message.dart';
 export 'src/widgets/send_button.dart';
 export 'src/widgets/text_message.dart';
 export 'src/widgets/chat_client.dart';
-export 'src/widgets/media_activation_message.dart';
-export 'src/widgets/media_deactivation_message.dart';
+export 'src/widgets/text_only_message.dart';
