@@ -159,11 +159,11 @@ class ChatClient extends StatefulWidget {
   final types.User user;
 
   @override
-  _ChatState createState() => _ChatState();
+  _ChatClientState createState() => _ChatClientState();
 }
 
 /// [Chat] widget state
-class _ChatState extends State<ChatClient> {
+class _ChatClientState extends State<ChatClient> {
   List<Object> _chatMessages = [];
   List<PreviewImage> _gallery = [];
   int _imageViewIndex = 0;
@@ -174,6 +174,7 @@ class _ChatState extends State<ChatClient> {
   void initState() {
     super.initState();
     // settiamo le due variabili con i valori passati nel costruttore della chat
+    debugPrint("also triggerata init state");
     _mediaInputState = widget.mediaInput;
     _textInputState = widget.textInput;
     //
@@ -216,6 +217,7 @@ class _ChatState extends State<ChatClient> {
   }
 
   Widget _buildImageGallery() {
+    debugPrint('image gallery built');
     return Dismissible(
       key: const Key('photo_view_gallery'),
       direction: DismissDirection.down,
@@ -319,8 +321,9 @@ class _ChatState extends State<ChatClient> {
 
   void _onCloseGalleryPressed() {
     setState(() {
+      debugPrint('premuto tasto chiusura gallery');
       _isImageViewVisible = false;
-      _mediaInputState = false;
+      this._mediaInputState = false;
       _textInputState = false;
     });
   }
@@ -383,6 +386,7 @@ class _ChatState extends State<ChatClient> {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint('build triggerata con ' + (_mediaInputState ? "true":"false"));
     return InheritedUser(
       user: widget.user,
       child: InheritedChatTheme(
@@ -435,7 +439,7 @@ class _ChatState extends State<ChatClient> {
                                       MediaQuery.of(context).size.width * 0.7,
                                   height:
                                       MediaQuery.of(context).size.height / 10,
-                                  margin: EdgeInsets.only(bottom: 25),
+                                  margin: EdgeInsets.only(bottom: 25, top: 25),
                                   child: ElevatedButton(
                                       onPressed: widget.onAttachmentPressed,
                                       child: Padding(

@@ -144,8 +144,24 @@ class Message extends StatelessWidget {
           showName: showName,
           onChoiceTap: onChoiceSelect,
         );
+      case types.MessageType.media_activation:
+        final textMessage = message as types.TextMessage;
+        return TextMessage(
+          message: textMessage,
+          onPreviewDataFetched: onPreviewDataFetched,
+          showName: showName,
+          usePreviewData: usePreviewData,
+        );
+              case types.MessageType.media_deactivation:
+        final textMessage = message as types.TextMessage;
+        return TextMessage(
+          message: textMessage,
+          onPreviewDataFetched: onPreviewDataFetched,
+          showName: showName,
+          usePreviewData: usePreviewData,
+        );
       default:
-        return const SizedBox();
+        return const SizedBox(width: null, height: null,);
     }
   }
 
