@@ -9,6 +9,8 @@ import 'image_message.dart';
 import 'inherited_chat_theme.dart';
 import 'inherited_user.dart';
 import 'text_message.dart';
+import 'media_activation_message.dart';
+import 'media_deactivation_message.dart';
 
 /// Base widget for all message types in the chat. Renders bubbles around
 /// messages, delivery time and status. Sets maximum width for a message for
@@ -145,21 +147,17 @@ class Message extends StatelessWidget {
           onChoiceTap: onChoiceSelect,
         );
       case types.MessageType.media_activation:
-        final textMessage = message as types.TextMessage;
-        return TextMessage(
+        final textMessage = message as types.MediaActivationMessage;
+        return MediaActivationMessage(
           message: textMessage,
-          onPreviewDataFetched: onPreviewDataFetched,
           showName: showName,
-          usePreviewData: usePreviewData,
         );
-              case types.MessageType.media_deactivation:
-        final textMessage = message as types.TextMessage;
-        return TextMessage(
-          message: textMessage,
-          onPreviewDataFetched: onPreviewDataFetched,
-          showName: showName,
-          usePreviewData: usePreviewData,
-        );
+        case types.MessageType.media_deactivation:
+          final textMessage = message as types.MediaDeactivationMessage;
+          return MediaDeactivationMessage(
+            message: textMessage,
+            showName: showName,
+          );
       default:
         return const SizedBox(width: null, height: null,);
     }

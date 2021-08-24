@@ -12,7 +12,6 @@ class MediaActivationMessage extends StatelessWidget {
   const MediaActivationMessage({
     Key? key,
     required this.message,
-    required this.usePreviewData,
     required this.showName,
   }) : super(key: key);
 
@@ -21,9 +20,6 @@ class MediaActivationMessage extends StatelessWidget {
 
   /// Show user name for the received message. Useful for a group chat.
   final bool showName;
-
-  /// Enables link (URL) preview
-  final bool usePreviewData;
 
   Widget _textWidget(types.User user, BuildContext context) {
     final color = getUserAvatarNameColor(message.author,
