@@ -164,10 +164,17 @@ class Message extends StatelessWidget {
           return TextOnlyMessage(
             message: textMessage,
             showName: showName,
+            text: "Start Bot!" 
+          );
+        case types.MessageType.fulfillment:
+          final textMessage = message as types.FulfillmentMessage;
+            return TextOnlyMessage(
+            message: textMessage,
+            showName: showName,
             text: textMessage.text!
           );
       default:
-        return const SizedBox(width: null, height: null,);
+        return const SizedBox(width: 0, height: 0);
     }
   }
 
