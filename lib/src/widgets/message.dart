@@ -173,6 +173,13 @@ class Message extends StatelessWidget {
             showName: showName,
             text: textMessage.text!
           );
+        case types.MessageType.keyboard_activation:
+            final textMessage = message as types.FulfillmentMessage;
+            return TextOnlyMessage(
+            message: textMessage,
+            showName: showName,
+            text: textMessage.text!
+          );
       default:
         return const SizedBox(width: 0, height: 0);
     }
