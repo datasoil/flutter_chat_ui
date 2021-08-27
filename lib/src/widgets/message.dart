@@ -174,7 +174,7 @@ class Message extends StatelessWidget {
             text: textMessage.text!
           );
         case types.MessageType.keyboard_activation:
-            final textMessage = message as types.FulfillmentMessage;
+            final textMessage = message as types.ActivateKeyboardMessage;
             return TextOnlyMessage(
             message: textMessage,
             showName: showName,
