@@ -386,7 +386,7 @@ class _ChatClientState extends State<ChatClient> {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint('build triggerata con ' + (_mediaInputState ? "true":"false"));
+    debugPrint('build triggerata con ' + (_mediaInputState ? "true":"false")+ (_textInputState ? "true":"false"));
     return InheritedUser(
       user: widget.user,
       child: InheritedChatTheme(
