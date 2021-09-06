@@ -117,7 +117,8 @@ class _VideoMessageState extends State<VideoMessage> {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.message.uri != '') {
+    debugPrint(widget.message.uri);
+    if (widget.message.uri != null) {
       //il video è sul firestore
       return GestureDetector(
         child: Stack(alignment: AlignmentDirectional.center, children: [
