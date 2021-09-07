@@ -147,39 +147,28 @@ class Message extends StatelessWidget {
         );
       case types.MessageType.media_activation:
         final textMessage = message as types.MediaActivationMessage;
-          return TextOnlyMessage(
-            message: textMessage,
-            showName: showName,
-            text: textMessage.text!
-          );
-        case types.MessageType.media_deactivation:
-          final textMessage = message as types.MediaDeactivationMessage;
-          return TextOnlyMessage(
-            message: textMessage,
-            showName: showName,
-            text: textMessage.text!
-          );
-        case types.MessageType.start:
-          final textMessage = message as types.StartMessage;
-          return TextOnlyMessage(
-            message: textMessage,
-            showName: showName,
-            text: "Start Bot!" 
-          );
-        case types.MessageType.fulfillment:
-          final textMessage = message as types.FulfillmentMessage;
-            return TextOnlyMessage(
-            message: textMessage,
-            showName: showName,
-            text: textMessage.text!
-          );
-        case types.MessageType.keyboard_activation:
-            final textMessage = message as types.ActivateKeyboardMessage;
-            return TextOnlyMessage(
-            message: textMessage,
-            showName: showName,
-            text: textMessage.text!
-          );
+        return TextOnlyMessage(
+            message: textMessage, showName: showName, text: textMessage.text!);
+      case types.MessageType.media_deactivation:
+        final textMessage = message as types.MediaDeactivationMessage;
+        return TextOnlyMessage(
+            message: textMessage, showName: showName, text: textMessage.text!);
+      case types.MessageType.start:
+        final textMessage = message as types.StartMessage;
+        return TextOnlyMessage(
+            message: textMessage, showName: showName, text: "Start Bot!");
+      case types.MessageType.fulfillment:
+        final textMessage = message as types.FulfillmentMessage;
+        return TextOnlyMessage(
+            message: textMessage, showName: showName, text: textMessage.text!);
+      case types.MessageType.keyboard_activation:
+        final textMessage = message as types.ActivateKeyboardMessage;
+        return TextOnlyMessage(
+            message: textMessage, showName: showName, text: textMessage.text!);
+      case types.MessageType.finish:
+        final textMessage = message as types.FinishMessage;
+        return TextOnlyMessage(
+            message: textMessage, showName: showName, text: textMessage.text!);
       default:
         return const SizedBox(width: 0, height: 0);
     }
