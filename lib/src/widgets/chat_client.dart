@@ -48,16 +48,21 @@ class ChatClient extends StatefulWidget {
     this.timeFormat,
     this.usePreviewData = true,
     required this.user,
-    this.textInput = false,
-    this.mediaInput = false,
+    this.textInputVisibility = false,
+    this.mediaInputVisibility = false,
+    this.restartConv = false,
+    required this.onResetButtonTap
   }) : super(key: key);
 
   /// for activating and deactivating text input
-  final bool textInput;
+  final bool textInputVisibility;
 
   /// for activating and deactivating media input
-  final bool mediaInput;
-
+  final bool mediaInputVisibility;
+  /// for activating a new conversation whe the previus is completed
+  final bool restartConv;
+  ///
+  final void Function(String) onResetButtonTap;
   /// See [Message.buildCustomMessage]
   final Widget Function(types.Message)? buildCustomMessage;
 
@@ -168,15 +173,17 @@ class _ChatClientState extends State<ChatClient> {
   List<PreviewImage> _gallery = [];
   int _imageViewIndex = 0;
   bool _isImageViewVisible = false;
-  bool _mediaInputState = false;
-  bool _textInputState = false;
+  bool _isMediaInputVisible = false;
+  bool _isKeyboardInputVisible = false;
+  bool _isRestartConvButtonVisible = false;
   @override
   void initState() {
     super.initState();
     // settiamo le due variabili con i valori passati nel costruttore della chat
     debugPrint("also triggerata init state");
-    _mediaInputState = widget.mediaInput;
-    _textInputState = widget.textInput;
+    _isMediaInputVisible = widget.mediaInputVisibility ;
+    _isKeyboardInputVisible = widget.textInputVisibility;
+    _isRestartConvButtonVisible = widget.restartConv;
     //
     didUpdateWidget(widget);
   }
@@ -323,8 +330,8 @@ class _ChatClientState extends State<ChatClient> {
     setState(() {
       debugPrint('premuto tasto chiusura gallery');
       _isImageViewVisible = false;
-      this._mediaInputState = false;
-      _textInputState = false;
+      this._isMediaInputVisible = false;
+      _isKeyboardInputVisible = false;
     });
   }
 
@@ -386,7 +393,7 @@ class _ChatClientState extends State<ChatClient> {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint('build triggerata con ' + (_mediaInputState ? "true":"false")+ (_textInputState ? "true":"false"));
+    debugPrint('build triggerata con ' + (_isMediaInputVisible ? "true":"false")+ (_isKeyboardInputVisible ? "true":"false"));
     return InheritedUser(
       user: widget.user,
       child: InheritedChatTheme(
@@ -421,7 +428,7 @@ class _ChatClientState extends State<ChatClient> {
                               ),
                       ),
                       // ignore: prefer_if_elements_to_conditional_expressions
-                      (widget.textInput
+                      widget.textInputVisibility
                           ? Input(
                               isAttachmentUploading:
                                   widget.isAttachmentUploading,
@@ -429,7 +436,7 @@ class _ChatClientState extends State<ChatClient> {
                               onSendPressed: widget.onSendPressed,
                               onTextChanged: widget.onTextChanged,
                             )
-                          : (widget.mediaInput
+                          : (widget.mediaInputVisibility
                               ? Container(
                                   decoration: BoxDecoration(
                                       color: widget.theme.primaryColor,
@@ -453,7 +460,7 @@ class _ChatClientState extends State<ChatClient> {
                                         //      InheritedL10n.of(context).l10n.attachmentButtonAccessibilityLabel,
                                       )), //Ink.image(image: AssetImage('assets/icon-attach.png')),
                                 )
-                              : createNoInputBanner(context)))
+                              : (createNoInputBanner(context)))
                     ],
                   ),
                 ),

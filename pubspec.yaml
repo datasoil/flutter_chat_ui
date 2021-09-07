@@ -15,9 +15,9 @@ dependencies:
   diffutil_dart: ^2.0.0+1
   equatable: ^2.0.3
   flutter_chat_types:
-    path: ../../flutter_chat_types/flutter_chat_types
+    path: ../flutter_chat_types
   flutter_link_previewer:
-     path: ../../flutter_link_previewer/flutter_link_previewer
+     path: ../flutter_link_previewer
     #git:
      # url: git://github.com/Giosh99/flutter_link_previewer
       #ref: main
