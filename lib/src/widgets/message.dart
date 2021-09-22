@@ -165,8 +165,8 @@ class Message extends StatelessWidget {
         final textMessage = message as types.ActivateKeyboardMessage;
         return TextOnlyMessage(
             message: textMessage, showName: showName, text: textMessage.text!);
-      case types.MessageType.finish:
-        final textMessage = message as types.FinishMessage;
+      case types.MessageType.cancel:
+        final textMessage = message as types.CancelMessage;
         return TextOnlyMessage(
             message: textMessage, showName: showName, text: textMessage.text!);
       default:

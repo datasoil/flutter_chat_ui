@@ -20,49 +20,52 @@ import 'message.dart';
 /// Entry widget, represents the complete chat
 class ChatClient extends StatefulWidget {
   /// Creates a chat widget
-  const ChatClient({
-    Key? key,
-    this.buildCustomMessage,
-    this.customDateHeaderText,
-    this.dateFormat,
-    this.dateLocale,
-    this.disableImageGallery,
-    this.emptyState,
-    this.isAttachmentUploading,
-    this.isLastPage,
-    this.l10n = const ChatL10nEn(),
-    required this.messages,
-    this.onAttachmentPressed,
-    this.onEndReached,
-    this.onEndReachedThreshold,
-    this.onMessageLongPress,
-    this.onMessageTap,
-    this.onVideoTap,
-    this.onPreviewDataFetched,
-    this.onChoiceSelect,
-    required this.onSendPressed,
-    this.onTextChanged,
-    this.showUserAvatars = false,
-    this.showUserNames = false,
-    this.theme = const DefaultChatTheme(),
-    this.timeFormat,
-    this.usePreviewData = true,
-    required this.user,
-    this.textInputVisibility = false,
-    this.mediaInputVisibility = false,
-    this.restartConv = false,
-    required this.onResetButtonTap
-  }) : super(key: key);
+  const ChatClient(
+      {Key? key,
+      this.buildCustomMessage,
+      this.customDateHeaderText,
+      this.dateFormat,
+      this.dateLocale,
+      this.disableImageGallery,
+      this.emptyState,
+      this.isAttachmentUploading,
+      this.isLastPage,
+      this.l10n = const ChatL10nEn(),
+      required this.messages,
+      this.onAttachmentPressed,
+      this.onEndReached,
+      this.onEndReachedThreshold,
+      this.onMessageLongPress,
+      this.onMessageTap,
+      this.onVideoTap,
+      this.onPreviewDataFetched,
+      this.onChoiceSelect,
+      required this.onSendPressed,
+      this.onTextChanged,
+      this.showUserAvatars = false,
+      this.showUserNames = false,
+      this.theme = const DefaultChatTheme(),
+      this.timeFormat,
+      this.usePreviewData = true,
+      required this.user,
+      this.textInputVisibility = false,
+      this.mediaInputVisibility = false,
+      this.restartConv = false,
+      required this.onResetButtonTap})
+      : super(key: key);
 
   /// for activating and deactivating text input
   final bool textInputVisibility;
 
   /// for activating and deactivating media input
   final bool mediaInputVisibility;
+
   /// for activating a new conversation whe the previus is completed
   final bool restartConv;
+
   ///
   final void Function(String) onResetButtonTap;
+
   /// See [Message.buildCustomMessage]
   final Widget Function(types.Message)? buildCustomMessage;
 
@@ -181,7 +184,7 @@ class _ChatClientState extends State<ChatClient> {
     super.initState();
     // settiamo le due variabili con i valori passati nel costruttore della chat
     debugPrint("also triggerata init state");
-    _isMediaInputVisible = widget.mediaInputVisibility ;
+    _isMediaInputVisible = widget.mediaInputVisibility;
     _isKeyboardInputVisible = widget.textInputVisibility;
     _isRestartConvButtonVisible = widget.restartConv;
     //
@@ -362,10 +365,10 @@ class _ChatClientState extends State<ChatClient> {
     var width = size.width;
     var height = size.height / 10;
     return Container(
-      color: Colors.green,
+      color: Colors.grey,
       // ignore: sort_child_properties_last
       child: const Center(
-          child: Text('Input is temporary disabled',
+          child: Text('Segui CoachBot per comporre il messaggio',
               style: TextStyle(
                   fontFamily: 'Avenir',
                   fontSize: 16,
@@ -393,7 +396,9 @@ class _ChatClientState extends State<ChatClient> {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint('build triggerata con ' + (_isMediaInputVisible ? "true":"false")+ (_isKeyboardInputVisible ? "true":"false"));
+    debugPrint('build triggerata con ' +
+        (_isMediaInputVisible ? "true" : "false") +
+        (_isKeyboardInputVisible ? "true" : "false"));
     return InheritedUser(
       user: widget.user,
       child: InheritedChatTheme(
