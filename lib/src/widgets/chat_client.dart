@@ -363,16 +363,16 @@ class _ChatClientState extends State<ChatClient> {
   Widget createNoInputBanner(BuildContext context) {
     var size = MediaQuery.of(context).size;
     var width = size.width;
-    var height = size.height / 10;
+    var height = 70.0;
     return Container(
-      color: Colors.grey,
+      color: Colors.grey[300],
       // ignore: sort_child_properties_last
       child: const Center(
           child: Text('Segui CoachBot per comporre il messaggio',
               style: TextStyle(
                   fontFamily: 'Avenir',
-                  fontSize: 16,
-                  fontWeight: FontWeight.w300,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
                   height: 1.333))),
       width: width,
       height: height,
