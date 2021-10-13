@@ -100,7 +100,14 @@ List<Object> calculateChatMessages(
         }
       }
 
-      if (message.type == types.MessageType.text && shouldShowName) {
+      if ((message.type == types.MessageType.text ||
+              message.type == types.MessageType.question ||
+              message.type == types.MessageType.fulfillment ||
+              message.type == types.MessageType.keyboard_activation ||
+              message.type == types.MessageType.media_activation ||
+              message.type == types.MessageType.fulfillment_waiting_coach ||
+              message.type == types.MessageType.coach_fulfillment) &&
+          shouldShowName) {
         showName = true;
         shouldShowName = false;
       }
@@ -124,7 +131,7 @@ List<Object> calculateChatMessages(
         DateHeader(
           text: customDateHeaderText != null
               ? customDateHeaderText(
-                 message.createdAt!,
+                  message.createdAt!,
                 )
               : getVerboseDateTimeRepresentation(
                   message.createdAt!,

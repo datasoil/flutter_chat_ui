@@ -169,6 +169,14 @@ class Message extends StatelessWidget {
         final textMessage = message as types.CancelMessage;
         return TextOnlyMessage(
             message: textMessage, showName: showName, text: textMessage.text!);
+      case types.MessageType.fulfillment_waiting_coach:
+        final textMessage = message as types.FulFilmentWaitingCoach;
+        return TextOnlyMessage(
+            message: textMessage, showName: showName, text: textMessage.text!);
+      case types.MessageType.coach_fulfillment:
+        final textMessage = message as types.FulFilmentCoach;
+        return TextOnlyMessage(
+            message: textMessage, showName: showName, text: textMessage.text!);
       default:
         return const SizedBox(width: 0, height: 0);
     }

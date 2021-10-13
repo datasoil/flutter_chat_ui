@@ -58,9 +58,10 @@ class QuestionMessage extends StatelessWidget {
     final color = getUserAvatarNameColor(message.author,
         InheritedChatTheme.of(context).theme.userAvatarNameColors);
     final name = getUserName(message.author);
-
+    print("Question name " + name);
+    print("Show name " + showName.toString());
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
         if (showName)
