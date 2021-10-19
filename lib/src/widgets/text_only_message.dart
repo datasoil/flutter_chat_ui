@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:flutter_link_previewer/flutter_link_previewer.dart'
@@ -21,10 +19,12 @@ class TextOnlyMessage extends StatelessWidget {
   /// [types.TextMessage]
   final types.Message message;
   final String text;
+
   /// Show user name for the received message. Useful for a group chat.
   final bool showName;
 
-  Widget _textWidget(types.User user, types.Message message, String text, BuildContext context) {
+  Widget _textWidget(types.User user, types.Message message, String text,
+      BuildContext context) {
     final color = getUserAvatarNameColor(message.author,
         InheritedChatTheme.of(context).theme.userAvatarNameColors);
     final name = getUserName(message.author);
@@ -64,10 +64,10 @@ class TextOnlyMessage extends StatelessWidget {
     final _width = MediaQuery.of(context).size.width;
     return Container(
       margin: const EdgeInsets.symmetric(
-        horizontal: 24,
-        vertical: 16,
+        horizontal: 8,
+        vertical: 6,
       ),
-      child: _textWidget(_user, message,  text, context),
+      child: _textWidget(_user, message, text, context),
     );
   }
 }

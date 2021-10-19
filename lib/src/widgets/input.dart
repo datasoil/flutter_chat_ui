@@ -21,6 +21,7 @@ class Input extends StatefulWidget {
   const Input({
     Key? key,
     this.isAttachmentUploading,
+    required this.isAttachmentAlwaysDisabled,
     this.onAttachmentPressed,
     required this.onSendPressed,
     this.onTextChanged,
@@ -34,6 +35,8 @@ class Input extends StatefulWidget {
   /// managing media in dependencies we have no way of knowing if
   /// something is uploading so you need to set this manually.
   final bool? isAttachmentUploading;
+
+  final bool isAttachmentAlwaysDisabled;
 
   /// Will be called on [SendButton] tap. Has [types.PartialText] which can
   /// be transformed to [types.TextMessage] and added to the messages list.
@@ -91,8 +94,10 @@ class _InputState extends State<Input> {
           ),
         ),
       );
-    } else {
+    } else if (widget.isAttachmentAlwaysDisabled == false) {
       return AttachmentButton(onPressed: widget.onAttachmentPressed);
+    } else {
+      return const SizedBox.shrink();
     }
   }
 
@@ -130,15 +135,16 @@ class _InputState extends State<Input> {
           child: Focus(
             autofocus: true,
             child: Material(
+              elevation: .5,
               borderRadius:
                   InheritedChatTheme.of(context).theme.inputBorderRadius,
               color: InheritedChatTheme.of(context).theme.inputBackgroundColor,
               child: Container(
                 padding: EdgeInsets.fromLTRB(
                   24 + _query.padding.left,
-                  20,
+                  10,
                   24 + _query.padding.right,
-                  20 + _query.viewInsets.bottom + _query.padding.bottom,
+                  10 + _query.viewInsets.bottom + _query.padding.bottom,
                 ),
                 child: Row(
                   children: [
@@ -146,22 +152,28 @@ class _InputState extends State<Input> {
                     Expanded(
                       child: TextField(
                         controller: _textController,
-                        decoration: InputDecoration.collapsed(
-                          hintStyle: InheritedChatTheme.of(context)
-                              .theme
-                              .inputTextStyle
-                              .copyWith(
-                                color: InheritedChatTheme.of(context)
-                                    .theme
-                                    .inputTextColor
-                                    .withOpacity(0.5),
-                              ),
-                          hintText:
-                              InheritedL10n.of(context).l10n.inputPlaceholder,
-                        ),
+                        decoration: InputDecoration(
+                            contentPadding: const EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 0),
+                            border: const OutlineInputBorder(),
+                            hintStyle: InheritedChatTheme.of(context)
+                                .theme
+                                .inputTextStyle
+                                .copyWith(
+                                  color: InheritedChatTheme.of(context)
+                                      .theme
+                                      .inputTextColor
+                                      .withOpacity(0.5),
+                                ),
+                            hintText:
+                                InheritedL10n.of(context).l10n.inputPlaceholder,
+                            filled: true,
+                            fillColor: InheritedChatTheme.of(context)
+                                .theme
+                                .backgroundColor),
                         focusNode: _inputFocusNode,
                         keyboardType: TextInputType.multiline,
-                        maxLines: 5,
+                        maxLines: 3,
                         minLines: 1,
                         onChanged: widget.onTextChanged,
                         style: InheritedChatTheme.of(context)

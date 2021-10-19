@@ -44,11 +44,12 @@ class Chat extends StatefulWidget {
     this.onTextChanged,
     this.showUserAvatars = false,
     this.showUserNames = false,
-    this.theme =const DefaultChatTheme(),
+    this.theme = const DefaultChatTheme(),
     this.timeFormat,
     this.usePreviewData = true,
     required this.user,
   }) : super(key: key);
+
   /// See [Message.buildCustomMessage]
   final Widget Function(types.Message)? buildCustomMessage;
 
@@ -333,19 +334,19 @@ class _ChatState extends State<Chat> {
   }
 
   Widget createNoInputBanner(BuildContext context) {
-  var size = MediaQuery.of(context).size;
-  var width = size.width;
-  var height = size.height/10;
+    var size = MediaQuery.of(context).size;
+    var width = size.width;
+    var height = size.height / 10;
     return Container(
       color: Colors.green,
       // ignore: sort_child_properties_last
-      child: const Center(child: Text('Input is temporary disabled', 
-      style: TextStyle(      
-        fontFamily: 'Avenir',
-      fontSize: 16,
-      fontWeight: FontWeight.w300,
-      height: 1.333
-      ))),
+      child: const Center(
+          child: Text('Input is temporary disabled',
+              style: TextStyle(
+                  fontFamily: 'Avenir',
+                  fontSize: 16,
+                  fontWeight: FontWeight.w300,
+                  height: 1.333))),
       width: width,
       height: height,
     );
@@ -388,6 +389,7 @@ class _ChatState extends State<Chat> {
                       ),
                       // ignore: prefer_if_elements_to_conditional_expressions
                       Input(
+                        isAttachmentAlwaysDisabled: false,
                         isAttachmentUploading: widget.isAttachmentUploading,
                         onAttachmentPressed: widget.onAttachmentPressed,
                         onSendPressed: widget.onSendPressed,

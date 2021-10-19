@@ -66,8 +66,8 @@ class FulfillmentCoachMessage extends StatelessWidget {
 
     return Container(
       margin: const EdgeInsets.symmetric(
-        horizontal: 24,
-        vertical: 16,
+        horizontal: 8,
+        vertical: 6,
       ),
       child: _textWidget(_user, context),
     );

@@ -22,6 +22,7 @@ class ChatClient extends StatefulWidget {
   /// Creates a chat widget
   const ChatClient(
       {Key? key,
+      this.isAttachmentAlwaysDisabled = false,
       this.buildCustomMessage,
       this.customDateHeaderText,
       this.dateFormat,
@@ -53,6 +54,8 @@ class ChatClient extends StatefulWidget {
       this.restartConv = false,
       required this.onResetButtonTap})
       : super(key: key);
+
+  final bool isAttachmentAlwaysDisabled;
 
   /// for activating and deactivating text input
   final bool textInputVisibility;
@@ -435,6 +438,8 @@ class _ChatClientState extends State<ChatClient> {
                       // ignore: prefer_if_elements_to_conditional_expressions
                       widget.textInputVisibility
                           ? Input(
+                              isAttachmentAlwaysDisabled:
+                                  widget.isAttachmentAlwaysDisabled,
                               isAttachmentUploading:
                                   widget.isAttachmentUploading,
                               onAttachmentPressed: widget.onAttachmentPressed,
