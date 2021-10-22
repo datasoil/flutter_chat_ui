@@ -28,7 +28,6 @@ class TextOnlyMessage extends StatelessWidget {
     final color = getUserAvatarNameColor(message.author,
         InheritedChatTheme.of(context).theme.userAvatarNameColors);
     final name = getUserName(message.author);
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -61,13 +60,15 @@ class TextOnlyMessage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _user = InheritedUser.of(context).user;
-    final _width = MediaQuery.of(context).size.width;
-    return Container(
-      margin: const EdgeInsets.symmetric(
-        horizontal: 8,
-        vertical: 6,
-      ),
-      child: _textWidget(_user, message, text, context),
-    );
+    if (text != '') {
+      return Container(
+        margin: const EdgeInsets.symmetric(
+          horizontal: 8,
+          vertical: 6,
+        ),
+        child: _textWidget(_user, message, text, context),
+      );
+    }
+    return const SizedBox.shrink();
   }
 }
