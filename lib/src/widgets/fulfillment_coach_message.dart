@@ -47,7 +47,7 @@ class FulfillmentCoachMessage extends StatelessWidget {
             ),
           ),
         SelectableText(
-          message.text!,
+          parseMsgText(message.text!),
           style: user.id == message.author.id
               ? InheritedChatTheme.of(context).theme.sentMessageBodyTextStyle
               : InheritedChatTheme.of(context)

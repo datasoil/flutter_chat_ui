@@ -2,10 +2,49 @@ import 'dart:math';
 import 'dart:ui';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
+import 'package:intl/date_symbol_data_file.dart';
 import 'package:intl/intl.dart';
 import './models/date_header.dart';
 import './models/message_spacer.dart';
 import './models/preview_image.dart';
+
+String parseMsgText(String init) {
+  const DATE = 'date';
+  final exp = RegExp(r"(\[\[)([\w\s:-]*)(\]\])");
+  final brackets = RegExp(r"(\[\[)|(\]\])");
+  //String str = "prima del [[ date 1636102120 ]] gago [[ date 1636102121 ]]";
+  final Iterable<Match> matches = exp.allMatches(init);
+  DateTime? dt;
+  matches.forEach((match) {
+    var result = match.group(0);
+    if (result != null) {
+      result = result.replaceAll(brackets, '');
+      final trimmed = result.trim();
+      final splittrim = trimmed.split(' ');
+      var r = '';
+      switch (splittrim[0]) {
+        case DATE:
+          final temp = DateTime.fromMillisecondsSinceEpoch(
+              int.parse(splittrim[1]) * 1000);
+          if (dt == null ||
+              (dt!.day != temp.day ||
+                  dt!.month != temp.month ||
+                  dt!.year != temp.year)) {
+            r = DateFormat.yMMMd().add_Hm().format(temp);
+            dt = DateTime(temp.year, temp.month, temp.day);
+          } else {
+            r = DateFormat.Hm().format(temp);
+          }
+          break;
+        default:
+          r = splittrim[1];
+          break;
+      }
+      init = init.replaceFirst(exp, r);
+    }
+  });
+  return init;
+}
 
 /// Returns text representation of a provided bytes value (e.g. 1kB, 1GB)
 String formatBytes(int size, [int fractionDigits = 2]) {

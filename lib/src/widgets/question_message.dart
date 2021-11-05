@@ -53,7 +53,7 @@ class QuestionMessage extends StatelessWidget {
               ),
             ),
           Text(
-            message.question,
+            parseMsgText(message.question),
             style: TextStyle(
                 fontSize: 14,
                 color:

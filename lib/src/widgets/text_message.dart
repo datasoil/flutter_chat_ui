@@ -77,7 +77,7 @@ class TextMessage extends StatelessWidget {
         vertical: 16,
       ),
       previewData: message.previewData,
-      text: message.text,
+      text: parseMsgText(message.text),
       textStyle: bodyTextStyle,
       width: width,
     );
@@ -105,7 +105,7 @@ class TextMessage extends StatelessWidget {
             ),
           ),
         SelectableText(
-          message.text,
+          parseMsgText(message.text),
           style: user.id == message.author.id
               ? InheritedChatTheme.of(context).theme.sentMessageBodyTextStyle
               : InheritedChatTheme.of(context)
@@ -123,7 +123,8 @@ class TextMessage extends StatelessWidget {
     final _width = MediaQuery.of(context).size.width;
 
     final urlRegexp = RegExp(REGEX_LINK);
-    final matches = urlRegexp.allMatches(message.text.toLowerCase());
+    final matches =
+        urlRegexp.allMatches(parseMsgText(message.text).toLowerCase());
 
     if (matches.isNotEmpty && usePreviewData && onPreviewDataFetched != null) {
       return _linkPreview(_user, _width, context);

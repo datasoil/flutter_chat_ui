@@ -41,7 +41,7 @@ class ChoiceButton extends StatelessWidget {
                 //border: Border.all(),
                 borderRadius: BorderRadius.circular(10)),
             child: Text(
-              choice.text.toString(),
+              parseMsgText(choice.text),
               textAlign: TextAlign.center,
               style: userId == authorId
                   ? InheritedChatTheme.of(context)

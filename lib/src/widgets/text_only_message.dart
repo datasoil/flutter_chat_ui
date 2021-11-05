@@ -45,7 +45,7 @@ class TextOnlyMessage extends StatelessWidget {
             ),
           ),
         SelectableText(
-          text,
+          parseMsgText(text),
           style: user.id == message.author.id
               ? InheritedChatTheme.of(context).theme.sentMessageBodyTextStyle
               : InheritedChatTheme.of(context)
