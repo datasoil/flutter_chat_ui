@@ -42,6 +42,7 @@ class _VideoMessageState extends State<VideoMessage> {
     super.initState();
     //_initVideoPlayer();
     _imageProvider = Conditional().getProvider(widget.message.thumbUri);
+    _size = Size(widget.message.width ?? 0, widget.message.height ?? 0);
   }
 
   @override
@@ -68,25 +69,25 @@ class _VideoMessageState extends State<VideoMessage> {
     _imageStream =
         _imageProvider?.resolve(createLocalImageConfiguration(context));
     if (_imageStream?.key != oldImageStream?.key) {
-      final listener = ImageStreamListener(_updateImage);
-      oldImageStream?.removeListener(listener);
-      _imageStream?.addListener(listener);
+      //final listener = ImageStreamListener(_updateImage);
+      //oldImageStream?.removeListener(listener);
+      //_imageStream?.addListener(listener);
     }
   }
 
-  void _updateImage(ImageInfo info, bool _) {
+  /*void _updateImage(ImageInfo info, bool _) {
     setState(() {
       _size = Size(
         info.image.width.toDouble(),
         info.image.height.toDouble(),
       );
     });
-  }
+  }*/
 
   @override
   Future<void> dispose() async {
     super.dispose();
-    _imageStream?.removeListener(ImageStreamListener(_updateImage));
+    //_imageStream?.removeListener(ImageStreamListener(_updateImage));
     //await _controller.dispose();
   }
 
@@ -117,8 +118,7 @@ class _VideoMessageState extends State<VideoMessage> {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint(widget.message.uri);
-    if (widget.message.uri != null) {
+    if (widget.message.uri != null && widget.message.uri != '') {
       //il video è sul firestore
       return GestureDetector(
         child: Stack(alignment: AlignmentDirectional.center, children: [
@@ -130,7 +130,7 @@ class _VideoMessageState extends State<VideoMessage> {
             child: BackdropFilter(
               filter: ImageFilter.blur(sigmaX: 1, sigmaY: 1),
               child: AspectRatio(
-                aspectRatio: 9 / 16,
+                aspectRatio: _size.aspectRatio > 0 ? _size.aspectRatio : 1,
                 child: Image(
                   fit: BoxFit.contain,
                   image: _imageProvider!,
@@ -153,14 +153,11 @@ class _VideoMessageState extends State<VideoMessage> {
           minWidth: 170,
         ),
         color: Colors.white,
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 1, sigmaY: 1),
-          child: AspectRatio(
-            aspectRatio: 9 / 16,
-            child: Image(
-              fit: BoxFit.contain,
-              image: _imageProvider!,
-            ),
+        child: AspectRatio(
+          aspectRatio: _size.aspectRatio > 0 ? _size.aspectRatio : 1,
+          child: Image(
+            fit: BoxFit.contain,
+            image: _imageProvider!,
           ),
         ),
       );

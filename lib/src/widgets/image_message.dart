@@ -65,24 +65,24 @@ class _ImageMessageState extends State<ImageMessage> {
     _imageStream =
         _imageProvider?.resolve(createLocalImageConfiguration(context));
     if (_imageStream?.key != oldImageStream?.key) {
-      final listener = ImageStreamListener(_updateImage);
-      oldImageStream?.removeListener(listener);
-      _imageStream?.addListener(listener);
+      //final listener = ImageStreamListener(_updateImage);
+      //oldImageStream?.removeListener(listener);
+      //_imageStream?.addListener(listener);
     }
   }
 
-  void _updateImage(ImageInfo info, bool _) {
+  /*void _updateImage(ImageInfo info, bool _) {
     setState(() {
       _size = Size(
         info.image.width.toDouble(),
         info.image.height.toDouble(),
       );
     });
-  }
+  }*/
 
   @override
   void dispose() {
-    _imageStream?.removeListener(ImageStreamListener(_updateImage));
+    //_imageStream?.removeListener(ImageStreamListener(_updateImage));
     super.dispose();
   }
 
