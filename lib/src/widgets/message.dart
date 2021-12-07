@@ -184,7 +184,7 @@ class Message extends StatelessWidget {
 
   Widget _buildStatus(BuildContext context) {
     switch (message.status) {
-      case types.Status.error:
+      /*case types.Status.error:
         return InheritedChatTheme.of(context).theme.errorIcon != null
             ? InheritedChatTheme.of(context).theme.errorIcon!
             : Image.asset(
@@ -222,7 +222,7 @@ class Message extends StatelessWidget {
               ),
             ),
           ),
-        );
+        );*/
       default:
         return const SizedBox();
     }
